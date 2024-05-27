@@ -3,50 +3,28 @@
 # Run this script from the root directory of the workshop repository.
 # Note that this script is expected to run successfully.
 
-# Run the auction example.
-cd auction
-echo "
-[CHECK] CHECKING THE AUCTION EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
+# Function to execute example
+execute_example() {
+    local example_name=$1
+    local example_dir="$example_name"
+    
+    echo "[CHECK] CHECKING THE $example_name EXAMPLE"
+    
+    # Navigate to the example directory
+    cd "$example_dir" || exit 1
+    
+    # Ensure the run.sh script is executable and execute it
+    chmod +x ./run.sh
+    ./run.sh
+    
+    # Return to the root directory
+    cd ..
+}
 
-# Run the basic bank example.
-cd basic_bank
-echo "
-[CHECK] CHECKING THE BASIC BANK EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
+# List of examples to check
+examples=("auction" "basic_bank" "battleship" "tictactoe" "token" "vote")
 
-# Run the battleship example.
-cd battleship
-echo "
-[CHECK] CHECKING THE BATTLESHIP EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
-
-# Run the tictactoe example.
-cd tictactoe
-echo "
-[CHECK] CHECKING THE TICTACTOE EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
-
-# Run the token example.
-cd token
-echo "
-[CHECK] CHECKING THE TOKEN EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
-
-# Run the vote example.
-cd vote
-echo "
-[CHECK] CHECKING THE VOTE EXAMPLE"
-chmod +x ./run.sh
-./run.sh
-cd ..
+# Loop through each example and execute it
+for example in "${examples[@]}"; do
+    execute_example "$example"
+done
